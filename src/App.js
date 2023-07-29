@@ -62,7 +62,13 @@ function App() {
         </div>
       </div>
       <small className="m-0 p-0">
-        <a href=".." title="github acct" target="_blank">
+        <a
+          href="https://github.com/Jennygreg/weather-app"
+          title="github acct"
+          target="_blank"
+          without
+          rel="noreferrer"
+        >
           Open Source code
         </a>{" "}
         by Jennifer
