@@ -4,45 +4,49 @@ import axios from "axios";
 import "./App.css";
 import ReactAnimatedWeather from "react-animated-weather";
 
-function App() {
-  const [city, setCity] = useState("");
-  const [load, setLoad] = useState(false);
+function App(props) {
+  const [WeatherData, setWeatherData] = useState({ ready: false });
   const days = ["Sun", "Mon", "Tue", "Wed", "Thurs", "Fri", "Sat"];
+
   function searchCity(response) {
-    setLoad(true);
+    console.log(response);
+    setWeatherData({
+      ready: true,
+      Name: response.data.name,
+      Temp: response.data.main.temp,
+      Humidity: response.data.main.humidity,
+      Pressure: response.data.main.pressure,
+      MaxTemp: response.data.main.temp_max,
+      MinTemp: response.data.main.temp_min,
+      description: response.data.weather[0].description,
+      icon: response.data.weather[0].icon,
+      wind: response.data.wind.speed,
+      Timestamp: response.data.dt,
+      latitude: response.data.coord.lat,
+      longitude: response.data.coord.lon,
+    });
   }
 
-  function search(event) {
-    event.preventDefault;
-    const Apikey = "6caa6b54cfc577ffc9ddc75950d7efc3";
-    const unit = "metric";
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${Apikey}&unit=${unit}`;
-    axios.get(url).then(searchCity);
-  }
-  function getCity(event) {
-    setCity(event.target.value);
-  }
-  if (load) {
+  if (WeatherData.ready) {
     return (
       <div className="container">
         {" "}
         <div className="App">
-          <form onSubmit={search}>
+          <form>
             <input
               type="search"
               placeholder="Search a city..."
               className="Search"
-              onChange={getCity}
             />
             <input type="submit" value="Search" className="Submit" />
           </form>
           <div className="location">
-            <h1>Abuja</h1>
+            <h1>{WeatherData.Name}</h1>
             <p>
               Sat, 29 Jul, 2023 <br />
               <span>11:06</span>
             </p>
-            <p className="fs-4 mt-0"> Mostly Cloud</p>
+            <p className="fs-4 mt-0">{WeatherData.description} </p>
           </div>
           <div className="row">
             <div className="col-6">
@@ -52,14 +56,14 @@ function App() {
                 size={50}
                 animate={true}
               />{" "}
-              <h2>26 °C </h2>
+              <h2>{WeatherData.Temp} °C </h2>
             </div>
             <div className="col-6">
               <p>
-                Humidity: <span>60%</span>
+                Humidity: <span>{WeatherData.Humidity}</span>
               </p>
               <p>
-                Wind:<span> 4km/h </span>
+                Wind:<span> {WeatherData.wind} </span>
               </p>
             </div>
           </div>
@@ -75,7 +79,9 @@ function App() {
                       animate={true}
                     />{" "}
                     <p>{day}</p>
-                    <p>18°/28°</p>
+                    <p>
+                      {WeatherData.MinTemp}/{WeatherData.MaxTemp}
+                    </p>
                   </div>
                 </div>
               );
@@ -97,6 +103,11 @@ function App() {
       </div>
     );
   } else {
+    const city = "Abuja";
+    const Apikey = "6caa6b54cfc577ffc9ddc75950d7efc3";
+    const unit = "metric";
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${props.city}&appid=${Apikey}&units=${unit}`;
+    axios.get(url).then(searchCity);
     return "working on it";
   }
 }
