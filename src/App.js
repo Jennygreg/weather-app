@@ -13,11 +13,11 @@ function App(props) {
     setWeatherData({
       ready: true,
       Name: response.data.name,
-      Temp: response.data.main.temp,
+      Temp: Math.round(response.data.main.temp),
       Humidity: response.data.main.humidity,
       Pressure: response.data.main.pressure,
-      MaxTemp: response.data.main.temp_max,
-      MinTemp: response.data.main.temp_min,
+      MaxTemp: Math.round(response.data.main.temp_max),
+      MinTemp: Math.round(response.data.main.temp_min),
       description: response.data.weather[0].description,
       icon: response.data.weather[0].icon,
       wind: response.data.wind.speed,
@@ -46,7 +46,9 @@ function App(props) {
               Sat, 29 Jul, 2023 <br />
               <span>11:06</span>
             </p>
-            <p className="fs-4 mt-0">{WeatherData.description} </p>
+            <p className="fs-4 mt-0 text-capitalize">
+              {WeatherData.description}{" "}
+            </p>
           </div>
           <div className="row">
             <div className="col-6">
@@ -59,12 +61,17 @@ function App(props) {
               <h2>{WeatherData.Temp} °C </h2>
             </div>
             <div className="col-6">
-              <p>
-                Humidity: <span>{WeatherData.Humidity}</span>
-              </p>
-              <p>
-                Wind:<span> {WeatherData.wind} </span>
-              </p>
+              <ul>
+                <li className="text-decoration-none">
+                  Pressure:{WeatherData.Pressure}
+                </li>
+                <li className="text-decoration-none">
+                  Humidity: <span>{WeatherData.Humidity} %</span>
+                </li>
+                <li className="text-decoration-none">
+                  Wind:<span> {WeatherData.wind} Km/h</span>
+                </li>
+              </ul>
             </div>
           </div>
           <div className="forecast">
