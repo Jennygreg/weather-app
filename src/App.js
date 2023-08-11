@@ -61,14 +61,12 @@ function App(props) {
               <h2>{WeatherData.Temp} °C </h2>
             </div>
             <div className="col-6">
-              <ul>
-                <li className="text-decoration-none">
-                  Pressure:{WeatherData.Pressure}
-                </li>
-                <li className="text-decoration-none">
+              <ul className="text-decoration-none">
+                <li>Pressure:{WeatherData.Pressure}</li>
+                <li>
                   Humidity: <span>{WeatherData.Humidity} %</span>
                 </li>
-                <li className="text-decoration-none">
+                <li>
                   Wind:<span> {WeatherData.wind} Km/h</span>
                 </li>
               </ul>
