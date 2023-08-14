@@ -2,14 +2,15 @@ import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import axios from "axios";
 import "./App.css";
-import ReactAnimatedWeather from "react-animated-weather";
+import Time from "./time.js";
+import { InfinitySpin } from "react-loader-spinner";
 
 function App(props) {
+  const [city, setCity] = useState(props.city);
   const [WeatherData, setWeatherData] = useState({ ready: false });
   const days = ["Sun", "Mon", "Tue", "Wed", "Thurs", "Fri", "Sat"];
 
   function searchCity(response) {
-    console.log(response);
     setWeatherData({
       ready: true,
       Name: response.data.name,
@@ -19,52 +20,61 @@ function App(props) {
       MaxTemp: Math.round(response.data.main.temp_max),
       MinTemp: Math.round(response.data.main.temp_min),
       description: response.data.weather[0].description,
-      icon: response.data.weather[0].icon,
+      icon: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
       wind: response.data.wind.speed,
-      Timestamp: response.data.dt,
+      Timestamp: new Date(response.data.dt * 1000),
       latitude: response.data.coord.lat,
       longitude: response.data.coord.lon,
     });
   }
 
+  function Search() {
+    const Apikey = "6caa6b54cfc577ffc9ddc75950d7efc3";
+    const unit = "metric";
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${Apikey}&units=${unit}`;
+    axios.get(url).then(searchCity);
+  }
+  function Submit(event) {
+    event.preventDefault();
+    Search();
+  }
+  function getCity(event) {
+    setCity(event.target.value);
+  }
   if (WeatherData.ready) {
     return (
       <div className="container">
         {" "}
         <div className="App">
-          <form>
+          <form onSubmit={Submit}>
             <input
               type="search"
               placeholder="Search a city..."
               className="Search"
+              onChange={getCity}
             />
             <input type="submit" value="Search" className="Submit" />
           </form>
           <div className="location">
             <h1>{WeatherData.Name}</h1>
-            <p>
-              Sat, 29 Jul, 2023 <br />
-              <span>11:06</span>
-            </p>
-            <p className="fs-4 mt-0 text-capitalize">
+            <Time timeStamp={WeatherData.Timestamp} />{" "}
+            <p className="fs-5 mt-0 text-capitalize">
               {WeatherData.description}{" "}
             </p>
           </div>
           <div className="row">
             <div className="col-6">
-              <ReactAnimatedWeather
-                icon="CLOUDY"
-                color="Black"
-                size={50}
-                animate={true}
-              />{" "}
-              <h2>{WeatherData.Temp} °C </h2>
+              <h2>
+                {WeatherData.icon}
+                {WeatherData.Temp} <span className="celsuis">°C</span>/
+                <span className="fahrienheit">F</span>{" "}
+              </h2>
             </div>
             <div className="col-6">
-              <ul className="text-decoration-none">
-                <li>Pressure:{WeatherData.Pressure}</li>
+              <ul className="list-unstyled text-center">
+                <li>Pressure: {WeatherData.Pressure}</li>
                 <li>
-                  Humidity: <span>{WeatherData.Humidity} %</span>
+                  Humidity: <span> {WeatherData.Humidity} %</span>
                 </li>
                 <li>
                   Wind:<span> {WeatherData.wind} Km/h</span>
@@ -72,17 +82,13 @@ function App(props) {
               </ul>
             </div>
           </div>
+
           <div className="forecast">
             {days.map(function (day, index) {
               return (
                 <div className="row forecast" key={index}>
                   <div className="col-2 p-0 m-0 text-center">
-                    <ReactAnimatedWeather
-                      icon="RAIN"
-                      color="Black"
-                      size={50}
-                      animate={true}
-                    />{" "}
+                    {WeatherData.icon}
                     <p>{day}</p>
                     <p>
                       {WeatherData.MinTemp}/{WeatherData.MaxTemp}
@@ -108,12 +114,12 @@ function App(props) {
       </div>
     );
   } else {
-    const city = "Abuja";
-    const Apikey = "6caa6b54cfc577ffc9ddc75950d7efc3";
-    const unit = "metric";
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${props.city}&appid=${Apikey}&units=${unit}`;
-    axios.get(url).then(searchCity);
-    return "working on it";
+    return (
+      <div className="loader ">
+        <InfinitySpin width="500" color="#4fa94d" />
+      </div>
+    );
+    Search();
   }
 }
 
