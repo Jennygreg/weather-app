@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import axios from "axios";
 import "./App.css";
 import Time from "./time.js";
+import TempUnit from "./TempUnit";
 import { InfinitySpin } from "react-loader-spinner";
 
 function App(props) {
@@ -64,11 +65,8 @@ function App(props) {
           </div>
           <div className="row">
             <div className="col-6">
-              <h2>
-                {WeatherData.icon}
-                {WeatherData.Temp} <span className="celsuis">°C</span>/
-                <span className="fahrienheit">F</span>{" "}
-              </h2>
+              {WeatherData.icon}
+              <TempUnit temp={WeatherData.Temp} />
             </div>
             <div className="col-6">
               <ul className="list-unstyled text-center">
