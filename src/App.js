@@ -20,7 +20,7 @@ function App(props) {
       MaxTemp: Math.round(response.data.main.temp_max),
       MinTemp: Math.round(response.data.main.temp_min),
       description: response.data.weather[0].description,
-      iconUrl: response.data.weather[0].icon,
+      iconUrl: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
       wind: response.data.wind.speed,
       Timestamp: new Date(response.data.dt * 1000),
       latitude: response.data.coord.lat,
