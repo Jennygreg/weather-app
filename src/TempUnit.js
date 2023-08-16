@@ -8,20 +8,20 @@ export default function Unit(props) {
   }
   function getCelsuis(event) {
     event.preventDefault();
-    setUnit("Celsuis");
+    setUnit("metric");
   }
   function Fahrenheit() {
-    return (props.temp * 9) / 5 + 32;
+    return Math.round((props.temp * 9) / 5 + 32);
   }
 
   if (unit === "metric") {
     return (
       <h2>
-        {props.Temp}{" "}
-        <span className="celsuis">
-          °C /{" "}
-          <a href="/" onClick={getFahrenheit}>
-            F
+        {props.temp}{" "}
+        <span className="unit">
+          °C |{" "}
+          <a href="/" onClick={getFahrenheit} className="text-decoration-none ">
+            °F
           </a>
         </span>
       </h2>
@@ -29,12 +29,12 @@ export default function Unit(props) {
   } else {
     return (
       <h2>
-        {Fahrenheit()}{" "}
-        <span className="celsuis">
-          <a href="/" onClick={getCelsuis}>
-            °C /{" "}
+        {Fahrenheit()}
+        <span className="unit">
+          <a href="/" onClick={getCelsuis} className="text-decoration-none ">
+            °C |{" "}
           </a>
-          F
+          °F
         </span>
       </h2>
     );

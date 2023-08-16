@@ -7,7 +7,7 @@
   margin: 0 auto;
   text-align: center;
   width: 600px;
-  border: 1px solid black;
+  border: 1px solid #bbc2c9;
   padding: 0;
   margin-top: 50px;
 }
@@ -40,4 +40,20 @@
   text-align: center;
   margin-left: 250px;
   margin-top: 170px;
+}
+.unit {
+  position: relative;
+  top: -25px;
+  font-size: 16px;
+  margin-left: 0px;
+  font-weight: 200px;
+  color: black;
+}
+h2 {
+  font-size: 50px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #70757a;
+}
+.unit a {
+  color: black;
 }

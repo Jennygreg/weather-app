@@ -21,7 +21,7 @@ function App(props) {
       MaxTemp: Math.round(response.data.main.temp_max),
       MinTemp: Math.round(response.data.main.temp_min),
       description: response.data.weather[0].description,
-      icon: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+      iconUrl: response.data.weather[0].icon,
       wind: response.data.wind.speed,
       Timestamp: new Date(response.data.dt * 1000),
       latitude: response.data.coord.lat,
@@ -65,7 +65,7 @@ function App(props) {
           </div>
           <div className="row">
             <div className="col-6">
-              {WeatherData.icon}
+              {WeatherData.iconUrl}
               <TempUnit temp={WeatherData.Temp} />
             </div>
             <div className="col-6">
@@ -86,7 +86,7 @@ function App(props) {
               return (
                 <div className="row forecast" key={index}>
                   <div className="col-2 p-0 m-0 text-center">
-                    {WeatherData.icon}
+                    {WeatherData.iconUrl}
                     <p>{day}</p>
                     <p>
                       {WeatherData.MinTemp}/{WeatherData.MaxTemp}
@@ -112,12 +112,7 @@ function App(props) {
       </div>
     );
   } else {
-    return (
-      <div className="loader ">
-        <InfinitySpin width="500" color="#4fa94d" />
-      </div>
-    );
-    Search();
+    return Search();
   }
 }
 
