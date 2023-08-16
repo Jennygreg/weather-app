@@ -64,7 +64,7 @@ function App(props) {
           </div>
           <div className="row">
             <div className="col-6">
-              {WeatherData.iconUrl}
+              <img src={WeatherData.iconUrl} alt={WeatherData.description} />
               <TempUnit temp={WeatherData.Temp} />
             </div>
             <div className="col-6">
@@ -85,7 +85,6 @@ function App(props) {
               return (
                 <div className="row forecast" key={index}>
                   <div className="col-2 p-0 m-0 text-center">
-                    {WeatherData.iconUrl}
                     <p>{day}</p>
                     <p>
                       {WeatherData.MinTemp}/{WeatherData.MaxTemp}
