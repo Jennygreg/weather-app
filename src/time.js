@@ -15,7 +15,7 @@ function Time(props) {
     "Nov",
     "Dec",
   ];
-  const hour = props.timeStamp.getHours();
+  let hour = props.timeStamp.getHours();
   if (hour < 10) {
     hour = `0${hour}`;
   }

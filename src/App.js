@@ -4,7 +4,6 @@ import axios from "axios";
 import "./App.css";
 import Time from "./time.js";
 import TempUnit from "./TempUnit";
-import { InfinitySpin } from "react-loader-spinner";
 
 function App(props) {
   const [city, setCity] = useState(props.city);
