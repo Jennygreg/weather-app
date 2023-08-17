@@ -42,9 +42,9 @@ function App(props) {
   }
   if (WeatherData.ready) {
     return (
-      <div className="container">
+      <div className="container pb-2">
         {" "}
-        <div className="App">
+        <div className="App pb-2">
           <form onSubmit={Submit}>
             <input
               type="search"
