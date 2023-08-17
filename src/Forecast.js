@@ -32,6 +32,8 @@ export default function Forecast(props) {
                 <Weatherinfo Detail={forecast} />
               </div>
             );
+          } else {
+            return null;
           }
         })}
       </div>
