@@ -4,11 +4,11 @@ import axios from "axios";
 import "./App.css";
 import Time from "./time.js";
 import TempUnit from "./TempUnit";
+import Forecast from "./Forecast";
 
 function App(props) {
   const [city, setCity] = useState(props.city);
   const [WeatherData, setWeatherData] = useState({ ready: false });
-  const days = ["Sun", "Mon", "Tue", "Wed", "Thurs", "Fri", "Sat"];
 
   function searchCity(response) {
     setWeatherData({
@@ -23,8 +23,7 @@ function App(props) {
       iconUrl: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
       wind: response.data.wind.speed,
       Timestamp: new Date(response.data.dt * 1000),
-      latitude: response.data.coord.lat,
-      longitude: response.data.coord.lon,
+      coord: response.data.coord,
     });
   }
 
@@ -79,21 +78,7 @@ function App(props) {
               </ul>
             </div>
           </div>
-
-          <div className="forecast">
-            {days.map(function (day, index) {
-              return (
-                <div className="row forecast" key={index}>
-                  <div className="col-2 p-0 m-0 text-center">
-                    <p>{day}</p>
-                    <p>
-                      {WeatherData.MinTemp}/{WeatherData.MaxTemp}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          <Forecast coordinate={WeatherData.coord} />
         </div>
         <small className="m-0 p-0">
           <a
