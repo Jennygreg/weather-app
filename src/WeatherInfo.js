@@ -3,7 +3,6 @@ import "./WeatherInfo.css";
 export default function Weatherinfo(props) {
   let iconUrl = props.Detail.condition.icon_url;
 
-  console.log(props);
   function day() {
     let date = new Date(props.Detail.time * 1000);
     let day = date.getDay();
