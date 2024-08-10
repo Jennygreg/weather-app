@@ -1,5 +1,8 @@
+
+
+
 .container {
-  margin-bottom: 50px;
+  margin-bottom: 0;
   text-align: center;
 }
 .App {
@@ -7,9 +10,9 @@
   margin: 0 auto;
   text-align: center;
   width: 600px;
-  border: 1px solid #e0e9f1;
   padding: 0;
-  margin-top: 50px;
+  margin-top: 15px;
+  margin-bottom: 0;
 }
 .Search {
   width: 400px;
@@ -44,8 +47,12 @@
 h2 {
   font-size: 50px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: #70757a;
+  color: #c8cdd2;
 }
 .unit a {
   color: black;
+}
+.pHw{
+  color: #3e3e3d;
+  font-weight: bold;
 }

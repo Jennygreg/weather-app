@@ -42,9 +42,9 @@ function App(props) {
   }
   if (WeatherData.ready) {
     return (
-      <div className="container pb-2">
+      <div className="container">
         {" "}
-        <div className="App pb-2">
+        <div className="App">
           <form onSubmit={Submit}>
             <input
               type="search"
@@ -61,13 +61,13 @@ function App(props) {
               {WeatherData.description}{" "}
             </p>
           </div>
-          <div className="row">
+          <div className="row details">
             <div className="col-6">
               <img src={WeatherData.iconUrl} alt={WeatherData.description} />
               <TempUnit temp={WeatherData.Temp} />
             </div>
-            <div className="col-6">
-              <ul className="list-unstyled text-center">
+            <div className="col-6 ">
+              <ul className="list-unstyled text-center pHw">
                 <li>Pressure: {WeatherData.Pressure}</li>
                 <li>
                   Humidity: <span> {WeatherData.Humidity} %</span>
@@ -80,7 +80,8 @@ function App(props) {
           </div>
           <Forecast coordinate={WeatherData.coord} />
         </div>
-        <small className="m-0 p-0">
+       <div className="mt-4">
+       <small >
           <a
             href="https://github.com/Jennygreg/weather-app"
             title="github acct"
@@ -92,6 +93,7 @@ function App(props) {
           </a>{" "}
           by Jennifer
         </small>
+        </div> 
       </div>
     );
   } else {

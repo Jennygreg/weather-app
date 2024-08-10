@@ -21,13 +21,13 @@ export default function Weatherinfo(props) {
 
   return (
     <div>
-      <p>{day()}</p>
+      <p className='weekDay'>{day()}</p>
       <img
         src={iconUrl}
         alt={props.Detail.condition.description}
         className="images"
       />
-      <p>
+      <p className='deg'>
         °{Max()} °{Min()}
       </p>
     </div>
