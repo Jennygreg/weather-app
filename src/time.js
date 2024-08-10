@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState, useEffect} from "react";
 function Time(props) {
   const Days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
   const Months = [
@@ -15,7 +15,18 @@ function Time(props) {
     "Nov",
     "Dec",
   ];
-  let hour = props.timeStamp.getHours();
+  const [timeStamp, setTimeStamp] = useState(props.timeStamp);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setTimeStamp(new Date());
+    }, 1000); // update every 1 second
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [])
+  let hour = timeStamp.getHours();
   if (hour < 10) {
     hour = `0${hour}`;
   }
@@ -34,7 +45,7 @@ function Time(props) {
         {Months[props.timeStamp.getMonth()]}, {props.timeStamp.getFullYear()}{" "}
         <br />
         <span>
-          Last Updated: {hour}:{minute}:{second}
+          {hour}:{minute}:{second}
         </span>
       </p>
     </div>
