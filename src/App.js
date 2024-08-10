@@ -31,7 +31,8 @@ function App(props) {
     const Apikey = "6caa6b54cfc577ffc9ddc75950d7efc3";
     const unit = "metric";
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${Apikey}&units=${unit}`;
-    axios.get(url).then(searchCity);
+    axios.get(url).then(searchCity)
+    
   }
   function Submit(event) {
     event.preventDefault();
